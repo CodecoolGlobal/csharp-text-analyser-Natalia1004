@@ -1,8 +1,8 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 
-namespace csharp_text_analyser_Natalia1004
+namespace TextAnalyser
 {
-
 
     public class View
     {

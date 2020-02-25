@@ -58,7 +58,6 @@ It's the dataset. It is initialized with Iterator< and provides functions for st
 Returns sum of all occurrences (in the dataset) of the elements given as arguments ( _elems)_. Note: One string may be given as well. NOTE: To clarify - read how params keyword works 
 
 
-
 ### DictionarySize() 
 Returns the number of unique elements of the dataset. It’s the size so-called Author’s Dictionary - the set of different words the author of the text uses.
 
