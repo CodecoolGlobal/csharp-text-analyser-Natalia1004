@@ -71,13 +71,35 @@ namespace TextAnalyser
 
         }
 
-        public ISet<string> OccurMoreThan(int numberOfTimes)
+        public ISet<string> OccurMoreThan(int numberOfTimes,string nameFile)
         {
-            throw new NotImplementedException();
+            HashSet<string> WordsOccur = new HashSet<string>();
+            string text = File.ReadAllText(@nameFile);
+            text = text.ToLower();
+            string[] words = text.Split(new char[]{' ', '\n', '\r'});
+            Dictionary<string,int> countUniqueWords = new Dictionary<string, int>();
+            foreach(string word in words)
+            {
+                if(!countUniqueWords.ContainsKey(word))
+                {
+                    countUniqueWords.Add(word,1);
+                }
+                else
+                {
+                    countUniqueWords[word] ++;
+                }
+            }
+            foreach(string Key in countUniqueWords.Keys)
+            {
+                if (countUniqueWords[Key] > numberOfTimes)
+                {
+                    WordsOccur.Add(Key);
+                }
+            }
+            return WordsOccur;
+            
+
         }
-        public string[] ReaderTextFile(string nameFile)
-        {
-            throw new NotImplementedException();
-        }
+    
     }
 }

@@ -15,8 +15,12 @@ namespace TextAnalyser
         static void Main(string[] args)
         {
             StatisticalAnalysis NumberOfSomeWords = new StatisticalAnalysis();
+    
+            foreach(string word in NumberOfSomeWords.OccurMoreThan(10, "test.txt"))
+            {
+                Console.WriteLine(word);
+            }
             
-            Console.WriteLine(NumberOfSomeWords.Size("chars", "test.txt"));
 
         }
     }
