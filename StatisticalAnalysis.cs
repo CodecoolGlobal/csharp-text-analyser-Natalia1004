@@ -11,29 +11,32 @@ namespace TextAnalyser
     {
         public string nameFile{get; set;}
         public ITerator StatisticalAnalysisOf{ get; set; }
+        private ITerator Iterator{get; set;}
+
+        public StatisticalAnalysis(ITerator iterator)
+        {
+            Iterator = iterator;
+
+        }
         
         public int CountOf(params string[] words)
         {
-            string textFile = "test.txt";
             int CountOfAllOccurrences = 0;
-            foreach(string word in words)
+            while(Iterator.HasNext())
             {
-                StreamReader LineFileText = new StreamReader(@textFile);
-                while (!LineFileText.EndOfStream)
+                var currentElem = Iterator.MoveNext();
+                foreach(string word in words)
+            {
+                if (currentElem ==  word)
                 {
-                    string[] lineFromResults = LineFileText.ReadLine().Split(" ");
-                    
-                    for (int elem = 0; elem < lineFromResults.Length; elem ++ )
-                    {
-                        if (lineFromResults[elem].Contains(word))
-                        {
-                            CountOfAllOccurrences ++;
-                        }
-                    }
-
+                    CountOfAllOccurrences ++;
                 }
             }
+           
+            }
+            Iterator.Remove();
             return CountOfAllOccurrences;
+
         }
 
         public int DictionarySize(string nameFile)

@@ -14,13 +14,10 @@ namespace TextAnalyser
     {
         static void Main(string[] args)
         {
-            StatisticalAnalysis NumberOfSomeWords = new StatisticalAnalysis();
-    
-            foreach(string word in NumberOfSomeWords.OccurMoreThan(10, "test.txt"))
-            {
-                Console.WriteLine(word);
-            }
-            
+            FileContent Char = new FileContent("/Users/nataliafilipek/Desktop/OOP/csharp-text-analyser-Natalia1004/test.txt");
+            StatisticalAnalysis Occur = new StatisticalAnalysis(Char.CharIterator());
+            Console.WriteLine(Occur.CountOf("s"));
+              
 
         }
     }
