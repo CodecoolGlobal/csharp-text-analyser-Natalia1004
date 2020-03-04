@@ -12,13 +12,14 @@ namespace TextAnalyser
 {
     class Program
     {
+
+
         static void Main(string[] args)
         {
-            FileContent Char = new FileContent("/Users/nataliafilipek/Desktop/OOP/csharp-text-analyser-Natalia1004/test.txt");
+            FileContent Char = new FileContent("/Users/nataliafilipek/Desktop/OOP/csharp-text-analyser-Natalia1004/test2.txt");
             StatisticalAnalysis Occur = new StatisticalAnalysis(Char.CharIterator());
-            Console.WriteLine(Occur.CountOf("s"));
-              
-
+            Console.WriteLine(Occur.DictionarySize("test2.txt"));
         }
     }
+
 }

@@ -9,13 +9,13 @@ namespace TextAnalyser
         public FileContent WordIteratorOf{ get; set; }
         public int index{get; private set;}
 
-        public WordIterator(FileContent FileContentArrayOfWord)
+        public WordIterator(FileContent FileContentAsString)
         {
-         index = -1;
-         WordIteratorOf = FileContentArrayOfWord;   
+         index = 0;
+         WordIteratorOf = FileContentAsString;   
         }
 
-    
+        
         public bool HasNext()
         {
             if(index < WordIteratorOf.FileContentArrayOfWord.Length)
@@ -31,7 +31,7 @@ namespace TextAnalyser
 
         public string MoveNext()
         {
-            return null;
+            return WordIteratorOf.FileContentArrayOfWord[++index];
         }
 
         public void Remove()

@@ -41,12 +41,19 @@ namespace TextAnalyser
 
         public int DictionarySize(string nameFile)
         {
-            string text = File.ReadAllText(@nameFile);
-            text = text.ToLower();
-            string[] words = text.Split(new char[]{' ', '\n', '\r'});
-            string[] UniqueWords = words.Distinct().ToArray();            
-
-            return UniqueWords.Length;
+            List<string> UniqueOccurrences = new List<string>();
+            while(Iterator.HasNext())
+            {
+                var currentElem = Iterator.MoveNext();
+            {
+                if (!UniqueOccurrences.Contains(currentElem))
+                {
+                    UniqueOccurrences.Add(currentElem);
+                }
+            }
+           
+            }return UniqueOccurrences.Count();
+           
 
         }
 
