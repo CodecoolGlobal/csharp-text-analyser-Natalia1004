@@ -1,9 +1,9 @@
 
 namespace TextAnalyser
 {
-    interface ITerableText
+    interface IterableText
     {
-        ITerator CharIterator();
-        ITerator WordIterator();
+        Iterator CharIterator();
+        Iterator WordIterator();
     }
 }

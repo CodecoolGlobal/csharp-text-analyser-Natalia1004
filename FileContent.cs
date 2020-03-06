@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace TextAnalyser
 {
-    class FileContent : ITerableText
+    class FileContent : IterableText
     {
         public string FileContentAsString { get; set; }
         public string[] FileContentArrayOfWord { get; set; }
@@ -32,12 +32,12 @@ namespace TextAnalyser
         }
 
 
-        public ITerator WordIterator()
+        public Iterator WordIterator()
         {
             return new WordIterator(this);
         }
 
-        public ITerator CharIterator()
+        public Iterator CharIterator()
         {
             return new CharIterator(this);
         }

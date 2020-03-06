@@ -4,15 +4,15 @@ using System.Text;
 
 namespace TextAnalyser
 {
-    class WordIterator : ITerator
+    class WordIterator : Iterator
     {
         public FileContent WordIteratorOf{ get; set; }
         public int index{get; private set;}
 
-        public WordIterator(FileContent FileContentAsString)
+        public WordIterator(FileContent FileContentArrayOfWord)
         {
          index = 0;
-         WordIteratorOf = FileContentAsString;   
+         WordIteratorOf = FileContentArrayOfWord;   
         }
 
         
@@ -31,7 +31,7 @@ namespace TextAnalyser
 
         public string MoveNext()
         {
-            return WordIteratorOf.FileContentArrayOfWord[++index];
+            return WordIteratorOf.FileContentArrayOfWord[index++];
         }
 
         public void Remove()

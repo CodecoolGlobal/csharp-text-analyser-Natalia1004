@@ -10,10 +10,10 @@ namespace TextAnalyser
     class StatisticalAnalysis
     {
         public string nameFile{get; set;}
-        public ITerator StatisticalAnalysisOf{ get; set; }
-        private ITerator Iterator{get; set;}
+        public Iterator StatisticalAnalysisOf{ get; set; }
+        private Iterator Iterator{get; set;}
 
-        public StatisticalAnalysis(ITerator iterator)
+        public StatisticalAnalysis(Iterator iterator)
         {
             Iterator = iterator;
 
@@ -26,12 +26,12 @@ namespace TextAnalyser
             {
                 var currentElem = Iterator.MoveNext();
                 foreach(string word in words)
-            {
-                if (currentElem ==  word)
                 {
-                    CountOfAllOccurrences ++;
+                    if (currentElem ==  word)
+                    {
+                        CountOfAllOccurrences ++;
+                    }
                 }
-            }
            
             }
             Iterator.Remove();
@@ -39,77 +39,86 @@ namespace TextAnalyser
 
         }
 
-        public int DictionarySize(string nameFile)
+        public int DictionarySize()
         {
             List<string> UniqueOccurrences = new List<string>();
             while(Iterator.HasNext())
             {
                 var currentElem = Iterator.MoveNext();
-            {
-                if (!UniqueOccurrences.Contains(currentElem))
                 {
-                    UniqueOccurrences.Add(currentElem);
+                    if (!UniqueOccurrences.Contains(currentElem))
+                    {
+                        UniqueOccurrences.Add(currentElem);
+                    }
                 }
-            }
            
             }return UniqueOccurrences.Count();
-           
 
         }
 
-        public int Size(string choice,string nameFile)
+        public int Size()
         {
-            int NumberOfTotal = 0;
-            if (choice == "words")
+            int NumberOfAllElements = 0;
+
+            while(Iterator.HasNext())
             {
-                string text = File.ReadAllText(@nameFile);
-                text = text.ToLower();
-                string[] words = text.Split(new char[]{' ', '\n', '\r'});
-                NumberOfTotal = words.Length;
-
+                NumberOfAllElements ++;
+                Iterator.MoveNext();
             }
-            else
-            {
-                string text = File.ReadAllText(@nameFile);
-                foreach(char chars in text)
-                {
-                    NumberOfTotal ++;
-                }
-
-            }
-            return NumberOfTotal;
-
+            return NumberOfAllElements;
         }
 
-        public ISet<string> OccurMoreThan(int numberOfTimes,string nameFile)
+        public ISet<string> OccurMoreThan(int numberOfTimes)
         {
             HashSet<string> WordsOccur = new HashSet<string>();
-            string text = File.ReadAllText(@nameFile);
-            text = text.ToLower();
-            string[] words = text.Split(new char[]{' ', '\n', '\r'});
-            Dictionary<string,int> countUniqueWords = new Dictionary<string, int>();
-            foreach(string word in words)
+            Dictionary<string, int> DictionaryChar = DictionaryText();
+
+            foreach(string Key in DictionaryChar.Keys)
             {
-                if(!countUniqueWords.ContainsKey(word))
-                {
-                    countUniqueWords.Add(word,1);
-                }
-                else
-                {
-                    countUniqueWords[word] ++;
-                }
-            }
-            foreach(string Key in countUniqueWords.Keys)
-            {
-                if (countUniqueWords[Key] > numberOfTimes)
+                int values = DictionaryChar[Key];
+                if (values > numberOfTimes)
                 {
                     WordsOccur.Add(Key);
                 }
             }
             return WordsOccur;
-            
-
         }
-    
+
+        private Dictionary<string, int> DictionaryText()
+        {
+            Dictionary<string, int> AllCharIterator = new Dictionary<string, int>();
+            while(Iterator.HasNext())
+            {
+                string word = Iterator.MoveNext();
+
+                if(!AllCharIterator.ContainsKey(word))
+                {
+                    AllCharIterator.Add(word,1);
+                }
+                else
+                {
+                    AllCharIterator[word] ++;
+                }
+            }
+
+            return AllCharIterator;
+        }
+
+        public float CountRatio(string FirstWord, string SecondWord)
+        {
+            return CountOf(FirstWord) / CountOf(SecondWord);
+        }
+         
+        public List<decimal> CharToWholeText(string[] elems)
+        {
+            List<decimal> percentageCharToWholeText = new List<decimal>();
+            foreach(string elem in elems)
+            {
+                decimal percentage = (decimal) CountOf(elem) / (decimal) Size() * 100;
+                percentageCharToWholeText.Add(percentage);
+
+            }    
+            return percentageCharToWholeText;
+        }
     }
 }

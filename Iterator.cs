@@ -3,7 +3,7 @@ using System.IO;
 
 namespace TextAnalyser
 {
-    interface ITerator
+    interface Iterator
     {
         bool HasNext();
         string MoveNext();
